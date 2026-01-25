@@ -10,7 +10,8 @@ import {
 const canvasWidth = 100;
 const svgWidth = 80;
 const svgHeight = 80;
-const circumference = Math.PI * svgWidth;
+const r = svgWidth / 2;
+const circumference = 2 * Math.PI * r;
 const path = Skia.Path.Make();
 path.addRRect({
   rx: svgWidth,
