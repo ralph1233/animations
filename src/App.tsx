@@ -2,7 +2,6 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import RectPath from './animations/RectPath';
-import PathInterpolation from './animations/PathInterpolation';
 import WhatsappStories from './animations/WhatsappStories';
 
 const App = () => {
@@ -10,7 +9,6 @@ const App = () => {
     <GestureHandlerRootView>
       <SafeAreaProvider>
         {/* <RectPath /> */}
-        {/* <PathInterpolation /> */}
         <WhatsappStories />
       </SafeAreaProvider>
     </GestureHandlerRootView>
