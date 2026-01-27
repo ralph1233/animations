@@ -1,12 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
-import {
-  SafeAreaView,
-  SafeAreaInsetsContext,
-} from 'react-native-safe-area-context';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
+import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Canvas, Path } from '@shopify/react-native-skia';
 import { withTiming, useSharedValue, Easing } from 'react-native-reanimated';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 const svgWidth = 196;
 const svgHeight = 191;
@@ -16,6 +14,7 @@ const path =
 const RectPath = () => {
   const { width, height } = useWindowDimensions();
   const end = useSharedValue(0);
+  const headerHeight = useHeaderHeight();
 
   useEffect(() => {
     end.value = withTiming(1, {
@@ -33,10 +32,10 @@ const RectPath = () => {
         }
 
         const { top, bottom } = insets;
-        const safeAreaHeight = height - (top + bottom);
+        const safeAreaHeight = height - headerHeight - (top + bottom);
 
         return (
-          <SafeAreaView style={styles.container}>
+          <View style={styles.container}>
             <Canvas style={styles.canvas}>
               <Path
                 path={path}
@@ -69,7 +68,7 @@ const RectPath = () => {
                 strokeWidth={4}
               />
             </Canvas>
-          </SafeAreaView>
+          </View>
         );
       }}
     </SafeAreaInsetsContext.Consumer>
