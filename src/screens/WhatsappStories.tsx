@@ -1,6 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, StyleSheet, View } from 'react-native';
 import User from '../components/User';
 
 type UserType = {
@@ -83,14 +82,14 @@ const WhatsappStories = () => {
   const keyExtractor = (item: UserType) => item.id;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={users}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={styles.flatlistContentStyle}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
