@@ -32,10 +32,14 @@ const User = ({
   name,
   storiesNb,
   storiesRead,
+  listIndex,
+  setCurrentIndex,
 }: {
   name: string;
   storiesNb: number;
   storiesRead: number;
+  listIndex: number;
+  setCurrentIndex: (listIndex: number) => void;
 }) => {
   const off = storiesNb === 1 ? 0 : 8;
   const on = (circumference - storiesNb * off) / storiesNb;

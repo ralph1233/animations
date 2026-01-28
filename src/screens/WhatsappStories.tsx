@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import User from '../components/User';
-
-type UserType = {
-  id: string;
-  name: string;
-  storiesNb: number;
-  storiesRead: number;
-};
+import UserStories from '../components/UserStories.ios';
+import type { UserType } from '../utils/types/user';
 
 const users: UserType[] = [
   {
@@ -73,10 +68,21 @@ const users: UserType[] = [
 ];
 
 const WhatsappStories = () => {
-  const renderItem = ({ item }: { item: UserType }) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentUserIndex, setCurrentUserIndex] = useState<number>(0);
+
+  const renderItem = ({ item, index }: { item: UserType; index: number }) => {
     const { name, storiesNb, storiesRead } = item;
 
-    return <User name={name} storiesNb={storiesNb} storiesRead={storiesRead} />;
+    return (
+      <User
+        name={name}
+        storiesNb={storiesNb}
+        storiesRead={storiesRead}
+        listIndex={index}
+        setCurrentIndex={setCurrentUserIndex}
+      />
+    );
   };
 
   const keyExtractor = (item: UserType) => item.id;
@@ -88,6 +94,12 @@ const WhatsappStories = () => {
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={styles.flatlistContentStyle}
+      />
+      <UserStories
+        currentUserIndex={currentUserIndex}
+        users={users}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       />
     </View>
   );
