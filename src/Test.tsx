@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import Animated, {
   Easing,
@@ -85,26 +85,28 @@ const Test = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.progressBarContainer}>
-        {bgColors.map((_, index) => (
-          <ProgressBar
-            key={index}
-            isCurrentIndex={index === currentIndex}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-          />
-        ))}
-      </View>
-      <View
-        style={[
-          styles.displayView,
-          {
-            backgroundColor: bgColors[currentIndex],
-          },
-        ]}
-      />
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.progressBarContainer}>
+          {bgColors.map((_, index) => (
+            <ProgressBar
+              key={index}
+              isCurrentIndex={index === currentIndex}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+            />
+          ))}
+        </View>
+        <View
+          style={[
+            styles.displayView,
+            {
+              backgroundColor: bgColors[currentIndex],
+            },
+          ]}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
